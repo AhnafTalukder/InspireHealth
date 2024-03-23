@@ -1,9 +1,10 @@
 import json
+import os
+
+from flask import Flask, request, jsonify
+from werkzeug.utils import secure_filename
 
 from backend.Objects.Campaign import Campaign
-import os
-from flask import Flask, flash, request, redirect, url_for, jsonify
-from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'mp4'}
