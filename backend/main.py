@@ -1,10 +1,40 @@
 import json
 
-from flask import Flask, jsonify
-
 from backend.Objects.Campaign import Campaign
+import os
+from flask import Flask, flash, request, redirect, url_for, jsonify
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'mp4'}
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@app.route('/upload_video', methods=['POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            return "no file"
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            return "no file"
+
+        if not allowed_file(file.filename):
+            return "filetype not allowed"
+
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return "success"
 
 
 def write_campaign_json(campaigns):
@@ -46,9 +76,4 @@ if __name__ == '__main__':
     tc.patients = ["patient_1"]
     campaigns = [tc]
     write_campaign_json(campaigns)
-    # jsn = json.dumps(hospitals, indent=4)
-    #
-    # # Writing to sample.json
-    # with open("Data/Hospitals.json", "w") as outfile:
-    #     outfile.write(jsn)
     app.run(debug=True)
