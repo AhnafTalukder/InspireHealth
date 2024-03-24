@@ -124,7 +124,7 @@ def upload_file():
         cpns.append(c)
         write_campaign_json(cpns)
 
-        return redirect("http://localhost:5173/discover")
+        return redirect("http://127.0.0.1:5173/discover")
 
 
 def write_campaign_json(campaigns):

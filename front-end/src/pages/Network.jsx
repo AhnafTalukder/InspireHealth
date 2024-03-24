@@ -18,7 +18,7 @@ const Network = () =>{
         <br></br>
         <h1>Join our network of hospitals</h1>
         <br></br>
-        <form action="http://localhost:5000/upload_video" method="POST" encType="multipart/form-data">
+        <form action="http://127.0.0.1:5000/upload_video" method="POST" encType="multipart/form-data">
         <label for="name">Hospital Name:</label><br></br>
         <input type="text" id="hospital_name" name="hospital_name" required/><br></br>
         
