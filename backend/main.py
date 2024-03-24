@@ -46,19 +46,23 @@ def upload_file():
         video.save(os.path.join(app.config['UPLOAD_FOLDER'], f"{video_name}.png"))
 
         c = Campaign()
-        c.start = request.form["start-date"]
-        c.end = request.form["end-date"]
-        c.name = request.form["name"]
+        c.start = request.form["start_date"]
+        c.end = request.form["end_date"]
+        c.name = request.form["campaign_name"]
         c.description = request.form["description"]
-        c.hospital_name = request.form["hospital-name"]
-        c.pledge_amount = request.form["pledge-amount"]
-        c.city = request.form["city"]
-        c.country = request.form["country"]
-        c.contact_email = request.form["email"]
-        c.paypal = request.form["paypal"]
+        c.hospital_name = request.form["hospital_name"]
+        c.pledge_amount = request.form["pledge_amount"]
+        c.city = request.form["city_name"]
+        c.country = request.form["country_name"]
+        c.contact_email = request.form["contact_email"]
+        c.paypal = request.form["paypal_user"]
         c.image_link = os.path.join(app.config['UPLOAD_FOLDER'], img_name)
         c.video_link = os.path.join(app.config['UPLOAD_FOLDER'], video_name)
         c.id = str(uuid.uuid4())
+
+        cpns = get_campaigns_data(jsn=False)
+        cpns.append(c)
+        write_campaign_json(cpns)
 
         return redirect("http://localhost:5173")
 
