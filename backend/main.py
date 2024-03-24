@@ -12,6 +12,7 @@ ALLOWED_EXTENSIONS = {'mp4'}
 app = Flask(__name__)
 CORS(app)
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), "static", "uploads")
+cpns_filename = os.path.join(os.path.dirname(__file__), "Data", "Campaigns.json")
 
 
 def allowed_file(filename):
@@ -70,12 +71,12 @@ def upload_file():
 def write_campaign_json(campaigns):
     serial_data = [d.get_serial() for d in campaigns]
     jsn = json.dumps(serial_data, indent=4)
-    with open("Data/Campaigns.json", "w") as outfile:
+    with open(cpns_filename, "w") as outfile:
         outfile.write(jsn)
 
 
 def get_campaigns_data(jsn=True):
-    with open("Data/Campaigns.json", "r") as infile:
+    with open(cpns_filename, "r") as infile:
         serial_data = json.load(infile)
         if jsn:
             return serial_data
