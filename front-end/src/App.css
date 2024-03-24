@@ -1,0 +1,89 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.banner{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    
+    height: 400px;
+    background-image:
+                linear-gradient(45deg,
+                    rgba(245, 70, 66, 0.75),
+                    rgba(8, 83, 156, 0.75)), 
+                      url(
+'https://images.pexels.com/photos/1692693/pexels-photo-1692693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size:     cover;                   
+    background-repeat:   no-repeat;
+    background-position: center center;  
+
+
+
+
+  
+     
+}
+
+
+.banner h1,
+.banner p{
+    
+    text-shadow: 1px 1px 2px black;
+}
+
+
+.spotlight{
+  
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+    height: 200px;
+}
+
+.donate-hero-panel{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+ 
+}
+
+.hero-content{
+
+    padding: 10px;
+    width: 500px;
+}
+
+
+.donate-hero-panel img{
+    width: 45%;
+}
+
+
+.button {
+    background-color: rgb(29, 133, 29);
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: limegreen;
+  }
+
+
+
