@@ -30,7 +30,7 @@ def add_captions(dst, src, name):
     def extract_audio(vid, outfilename):
         clip = VideoFileClip(vid)
         resfile = os.path.join(tmp_dir, outfilename)
-        clip.audio.write_audiofile()
+        clip.audio.write_audiofile(resfile)
         return resfile
 
     def transcribe_audio(aud):
