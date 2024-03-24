@@ -1,7 +1,7 @@
 class Campaign:
     def __init__(self, dct=None):
         self.attrs = ["start", "end", "name", "description", "hospital_name", "pledge_amount", "city", "country",
-                      "contact_email", "paypal", "image_link", "video_link"]
+                      "contact_email", "paypal", "image_link", "video_link", "id"]
         self.start: str = None
         self.end: str = None
         self.name: str = None
@@ -14,6 +14,7 @@ class Campaign:
         self.paypal: str = None
         self.image_link: str = None
         self.video_link: str = None
+        self.id: str = None
         if dct:
             self.set_serial(dct)
 

@@ -60,6 +60,8 @@ def get_campaigns_data(jsn=True):
 def get_campaigns():
     return jsonify(get_campaigns_data())
 
+# @app.route()
+
 
 if __name__ == '__main__':
     tc = Campaign()
@@ -75,6 +77,7 @@ if __name__ == '__main__':
     tc.paypal = "@paypaluser"
     tc.image_link = "test_image.png"
     tc.video_link = "test_video.mp4"
+    tc.id = "test_id"
     campaigns = [tc]
     write_campaign_json(campaigns)
     app.run(debug=True)
