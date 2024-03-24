@@ -18,7 +18,7 @@ const Network = () =>{
         <br></br>
         <h1>Join our network of hospitals</h1>
         <br></br>
-        <form action="http://localhost:5000/upload_video" method="POST">
+        <form action="http://localhost:5000/upload_video" method="POST" encType="multipart/form-data">
         <label for="name">Hospital Name:</label><br></br>
         <input type="text" id="hospital_name" name="name" required/><br></br>
         
@@ -73,7 +73,7 @@ const Network = () =>{
         <input type="file" id="image-link" name="avatar" accept="image/png, image/jpeg" /><br></br>
 
         <label for="avatar">Upload a video presenting your mission:</label><br></br>
-        <input type="file" id="video-link" name="avatar" accept="video/mp4" /><br></br><br></br>
+        <input type="file" id="video-link" name="video_link" accept="video/mp4" /><br></br><br></br>
         <input type="submit" value="Submit"/>
         </form>
         </div>

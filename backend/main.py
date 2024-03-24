@@ -1,17 +1,17 @@
 import json
 import os
+import uuid
 
 from flask import Flask, request, jsonify, redirect
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from Objects.Campaign import Campaign
 
-UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'mp4'}
 
 app = Flask(__name__)
 CORS(app)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), "static", "uploads")
 
 
 def allowed_file(filename):
@@ -23,19 +23,43 @@ def allowed_file(filename):
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
-        if 'file' not in request.files:
-            return redirect("http://localhost:5173")
-        file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            return redirect("http://localhost:5173")
+        # if 'file' not in request.files:
+        #     return redirect("http://localhost:5173")
+        # file = request.files['file']
+        # # If the user does not select a file, the browser submits an
+        # # empty file without a filename.
+        # if file.filename == '':
+        #     return redirect("http://localhost:5173")
+        #
+        # if not allowed_file(file.filename):
+        #     return redirect("http://localhost:5173")
+        #
+        # filename = secure_filename(file.filename)
+        # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        if not allowed_file(file.filename):
-            return redirect("http://localhost:5173")
+        img = request.files["image"]
+        img_name = str(uuid.uuid4())
+        img.save(os.path.join(app.config['UPLOAD_FOLDER'], f"{img_name}.png"))
 
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        video = request.files["video"]
+        video_name = str(uuid.uuid4())
+        video.save(os.path.join(app.config['UPLOAD_FOLDER'], f"{video_name}.png"))
+
+        c = Campaign()
+        c.start = request.form["start-date"]
+        c.end = request.form["end-date"]
+        c.name = request.form["name"]
+        c.description = request.form["description"]
+        c.hospital_name = request.form["hospital-name"]
+        c.pledge_amount = request.form["pledge-amount"]
+        c.city = request.form["city"]
+        c.country = request.form["country"]
+        c.contact_email = request.form["email"]
+        c.paypal = request.form["paypal"]
+        c.image_link = os.path.join(app.config['UPLOAD_FOLDER'], img_name)
+        c.video_link = os.path.join(app.config['UPLOAD_FOLDER'], video_name)
+        c.id = str(uuid.uuid4())
+
         return redirect("http://localhost:5173")
 
 
