@@ -10,7 +10,6 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 model = whisper.load_model("base")
 
-audio = "input.mp3"
 
 # result_sp = model.transcribe(audio)
 # result_en = model.transcribe(audio, task="translate")
@@ -28,7 +27,7 @@ audio = "input.mp3"
 
 
 
-def transcribe_audio(path):
+def transcribe_audio(audio):
     transcribe = model.transcribe(audio, task="translate")
     segments = transcribe['segments']
 
@@ -39,17 +38,23 @@ def transcribe_audio(path):
         segmentId = segment['id']+1
         segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] == ' ' else text}\n\n"
 
-        srtFilename = os.path.join("/Users/lillymoo/PycharmProjects/hooHacks/InspireHealth/generate-subtitle", f"subtitles.srt")
+
+        srtFilename = os.path.join(os.path.dirname(__file__), f"subtitles.srt")
         with open(srtFilename, 'a', encoding='utf-8') as srtFile:
             srtFile.write(segment)
 
     return srtFilename
 
-link = "https://www.youtube.com/watch?v=nBZOuNxQ8R0&pp=ygUdNSBtaW51dG9zIGRlIGhhYmxhbmRvIGVzcGFub2w%3D"
-print(transcribe_audio(link))
+
+audio = "input.mp3"
+print(transcribe_audio(audio))
 
 generator = lambda txt: TextClip(txt, font='Arial', fontsize=24, color='white')
-subs = SubtitlesClip('subtitles.srt', generator)
+
+# with open("subtitles.srt", "r", encoding='utf-8') as subtitle_file:
+#     subtitles = subtitle_file.read()
+
+subs = SubtitlesClip("subtitles.srt", generator)
 subtitles = SubtitlesClip(subs, generator)
 
 video = VideoFileClip("input.mp4")
