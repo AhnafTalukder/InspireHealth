@@ -2,15 +2,13 @@
     {
         "start": "3/22/2024",
         "end": "3/25/2024",
-        "name": "Ukraine Hosptial war relif",
+        "name": "test hospital",
         "description": "desc",
         "hospital_name": "ukr nat hospital",
         "pledge_amount": 10000000000000,
         "city": "Kiev",
         "country": "Ukraine",
         "contact_email": "someone@gmail.com",
-        "paypal": "@paypaluser",
-        "image_link": "test_image.png",
-        "video_link": "test_video.mp4"
+        "paypal": "@paypaluser"
     }
 ]

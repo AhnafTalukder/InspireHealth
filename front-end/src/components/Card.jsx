@@ -11,7 +11,6 @@ const Card = (props) =>{
 
                 <div  style = {{
                     width: "300px",
-                    height: "300px",
                     backgroundImage: `url(${props.image_url})`,
                     backgroundSize:     "cover",                  
                     backgroundRepeat:   "no-repeat",
@@ -24,9 +23,9 @@ const Card = (props) =>{
                 <h1>{props.name}</h1>
                 <p>{props.city}, {props.country}</p>
                 <p>{props.description}</p>
-                <p><span style={{fontSize:"25px"}}>{props.pledge_amount}</span>/month</p>
+                <p><span style={{fontSize:"25px"}}>${props.pledge_amount}</span>/month</p>
                 
-                <button>Donate Now</button>
+                <button className="button">Donate Now</button>
 
                 </div>
                 
