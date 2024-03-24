@@ -175,4 +175,4 @@ if __name__ == '__main__':
     tc.id = "test_id"
     campaigns = [tc]
     write_campaign_json(campaigns)
-    app.run(debug=False)
+    app.run(debug=True)
