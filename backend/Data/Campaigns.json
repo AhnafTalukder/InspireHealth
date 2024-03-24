@@ -1,0 +1,14 @@
+[
+    {
+        "start": "3/22/2024",
+        "end": "3/25/2024",
+        "name": "test hospital",
+        "description": "desc",
+        "hospital_name": "ukr nat hospital",
+        "pledge_amount": 10000000000000,
+        "city": "Kiev",
+        "country": "Ukraine",
+        "contact_email": "someone@gmail.com",
+        "paypal": "@paypaluser"
+    }
+]
