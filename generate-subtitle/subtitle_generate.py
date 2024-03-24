@@ -1,4 +1,5 @@
 from datetime import timedelta
+import moviepy as mpe
 from moviepy.editor import *
 from moviepy.video.tools.subtitles import SubtitlesClip
 import os
@@ -38,7 +39,7 @@ def transcribe_audio(path):
         segmentId = segment['id']+1
         segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] == ' ' else text}\n\n"
 
-        srtFilename = os.path.join("/InspireHealth/generate-subtitle", f"subtitles.srt")
+        srtFilename = os.path.join("/Users/lillymoo/PycharmProjects/hooHacks/InspireHealth/generate-subtitle", f"subtitles.srt")
         with open(srtFilename, 'a', encoding='utf-8') as srtFile:
             srtFile.write(segment)
 
@@ -56,12 +57,10 @@ result = CompositeVideoClip([video, subtitles.set_pos(('center','bottom'))])
 
 result.write_videofile("output.mp4")
 
-def combine_audio(vidname, audname, outname, fps=60):
-    my_clip = mpe.VideoFileClip(vidname)
-    audio_background = mpe.AudioFileClip(audname)
-    final_clip = my_clip.set_audio(audio_background)
-    final_clip.write_videofile(outname, fps=fps)
 
-    return outname
+video_clip = VideoFileClip("output.mp4")
+audio_clip = AudioFileClip("input.mp3")
+final_clip = video_clip.set_audio(audio_clip)
+final_clip.write_videofile("final.mp4")
 
-combine_audio("output.mp4", "input.mp3", "final.mp4")
+print("done")
