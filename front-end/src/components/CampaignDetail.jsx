@@ -24,13 +24,14 @@ const CampaignDetail = () =>{
     useEffect(() => {
 
          fetchFromBackend();
+        
 
       }, [params.id]);
 
 
     return(
     <>
- 
+        <h2>New Birth</h2>
     </>
     )
 }

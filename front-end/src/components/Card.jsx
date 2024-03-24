@@ -1,6 +1,8 @@
 import React from "react"
 import './Card.css'
 
+import { Link } from "react-router-dom"
+
 
 const Card = (props) =>{
 
@@ -11,7 +13,7 @@ const Card = (props) =>{
 
                 <div  style = {{
                     width: "300px",
-                    backgroundImage: `url(${props.image_url})`,
+                    backgroundImage: `url(${props.image})`,
                     backgroundSize:     "cover",                  
                     backgroundRepeat:   "no-repeat",
                     backgroundPosition: "center center"
@@ -24,8 +26,12 @@ const Card = (props) =>{
                 <p>{props.city}, {props.country}</p>
                 <p>{props.description}</p>
                 <p><span style={{fontSize:"25px"}}>${props.pledge_amount}</span>/month</p>
-                
-                <button className="button">Donate Now</button>
+                <p><b>paypal:</b>{props.paypal}</p>
+                <button className="button"> 
+                    <Link to={props.video}>
+                        See Impact
+                    </Link>
+                </button>
 
                 </div>
                 
