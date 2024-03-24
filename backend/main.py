@@ -4,7 +4,7 @@ import os
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
-from backend.Objects.Campaign import Campaign
+from Objects.Campaign import Campaign
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'mp4'}
