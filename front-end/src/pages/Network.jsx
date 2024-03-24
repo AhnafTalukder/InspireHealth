@@ -70,7 +70,7 @@ const Network = () =>{
         <input type="text" id="paypal_user" name="paypal_user" required/><br></br>
 
         <label for="image">Upload an image to be used for your mission:</label><br></br>
-        <input type="file" id="image" name="image" accept="image/png, image/jpeg" /><br></br>
+        <input type="file" id="image" name="image" accept="image/png" /><br></br>
 
         <label for="video">Upload a video presenting your mission:</label><br></br>
         <input type="file" id="video" name="video" accept="video/mp4" /><br></br><br></br>

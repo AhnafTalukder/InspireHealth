@@ -57,8 +57,8 @@ def upload_file():
         c.country = request.form["country_name"]
         c.contact_email = request.form["contact_email"]
         c.paypal = request.form["paypal_user"]
-        c.image_link = os.path.join(app.config['UPLOAD_FOLDER'], img_name)
-        c.video_link = os.path.join(app.config['UPLOAD_FOLDER'], video_name)
+        c.image_link = f"/static/uploads/{img_name}.png"
+        c.video_link = f"/static/uploads/{video_name}.png"
         c.id = str(uuid.uuid4())
 
         cpns = get_campaigns_data(jsn=False)
