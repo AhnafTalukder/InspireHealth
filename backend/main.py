@@ -55,13 +55,20 @@ def get_campaigns_data(jsn=True):
         return cpns
 
 
-
 @app.route("/get_campaigns")
 def get_campaigns():
     return jsonify(get_campaigns_data())
 
-# @app.route()
 
+@app.route("/get_id")
+def get_id():
+    id = request.args.get("cid")
+    cpns = get_campaigns_data(jsn=False)
+    for cpn in cpns:
+        if cpn.id == id:
+            return jsonify(cpn.get_serial())
+
+    return jsonify("No matching ID")
 
 if __name__ == '__main__':
     tc = Campaign()
