@@ -72,9 +72,7 @@ if __name__ == '__main__':
     tc.country = "Ukraine"
     tc.contact_email = "someone@gmail.com"
     tc.paypal = "@paypaluser"
-    tc.name = "test hospital"
-    tc.location = "ukraine"
-    tc.patients = ["patient_1"]
+    tc.video_name = "test_video.mp4"
     campaigns = [tc]
     write_campaign_json(campaigns)
     app.run(debug=True)
