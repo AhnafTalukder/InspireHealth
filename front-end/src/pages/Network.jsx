@@ -20,22 +20,22 @@ const Network = () =>{
         <br></br>
         <form action="http://localhost:5000/upload_video" method="POST" encType="multipart/form-data">
         <label for="name">Hospital Name:</label><br></br>
-        <input type="text" id="hospital_name" name="name" required/><br></br>
+        <input type="text" id="hospital_name" name="hospital_name" required/><br></br>
         
         <label for="name">City:</label><br></br>
-        <input type="text" id="city" name="name" required/><br></br>
+        <input type="text" id="city_name" name="city_name" required/><br></br>
         
         <label for="name">Country:</label><br></br>
-        <input type="text" id="country" name="name" required/><br></br>
+        <input type="text" id="country_name" name="country_name" required/><br></br>
 
         <label for="name">Campaign Name:</label><br></br>
-        <input type="text" id="name" name="name" required/><br></br>
+        <input type="text" id="campaign_name" name="campaign_name" required/><br></br>
         
         <label for="quantity">Pledge Amount: </label>
-        <input type="number" id="pledge_amount" name="quantity" min="5" max="2147483648"/><br></br>
+        <input type="number" id="pledge_amount" name="pledge_amount" min="5" max="2147483648"/><br></br>
 
         <label for="message">Campaign Description:</label><br></br>
-        <textarea id="description" name="message" rows="4" cols="50" required></textarea><br></br>
+        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br></br>
         
 
 
@@ -43,8 +43,8 @@ const Network = () =>{
           Start Date:
           <input
             type="date"
-            id="start-date"
-            name="start-date"
+            id="start_date"
+            name="start_date"
             value={startDate}
             placeholder="DD/MM/YY"
             onChange={(e) => setStartDate(e.target.value)}
@@ -55,25 +55,25 @@ const Network = () =>{
           End Date:
           <input
             type="date"
-            id="end-date"
-            name="end-date"
+            id="end_date"
+            name="end_date"
             value={endDate}
             placeholder="DD/MM/YY"
             onChange={(e) => setEndDate(e.target.value)}
           />
         </label>
      
-        <label for="email">Email Contact:</label><br></br>
-        <input type="email" id="contact_email" name="email" required/><br></br>
+        <label for="contact_email">Email Contact:</label><br></br>
+        <input type="email" id="contact_email" name="contact_email" required/><br></br>
 
-        <label for="name">Paypal Username:</label><br></br>
-        <input type="text" id="paypal" name="name" required/><br></br>
+        <label for="paypal_user">Paypal Username:</label><br></br>
+        <input type="text" id="paypal_user" name="paypal_user" required/><br></br>
 
-        <label for="avatar">Upload an image to be used for your mission:</label><br></br>
-        <input type="file" id="image-link" name="avatar" accept="image/png, image/jpeg" /><br></br>
+        <label for="image">Upload an image to be used for your mission:</label><br></br>
+        <input type="file" id="image" name="image" accept="image/png, image/jpeg" /><br></br>
 
-        <label for="avatar">Upload a video presenting your mission:</label><br></br>
-        <input type="file" id="video-link" name="video_link" accept="video/mp4" /><br></br><br></br>
+        <label for="video">Upload a video presenting your mission:</label><br></br>
+        <input type="file" id="video" name="video" accept="video/mp4" /><br></br><br></br>
         <input type="submit" value="Submit"/>
         </form>
         </div>
