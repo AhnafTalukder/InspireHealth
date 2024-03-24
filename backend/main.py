@@ -1,11 +1,16 @@
 import json
-import os
 import uuid
 
 from flask import Flask, request, jsonify, redirect
-from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from Objects.Campaign import Campaign
+
+from datetime import timedelta
+from moviepy.editor import *
+from moviepy.video.tools.subtitles import SubtitlesClip
+import os
+import whisper
+import ssl
 
 ALLOWED_EXTENSIONS = {'mp4'}
 
@@ -13,6 +18,57 @@ app = Flask(__name__)
 CORS(app)
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), "static", "uploads")
 cpns_filename = os.path.join(os.path.dirname(__file__), "Data", "Campaigns.json")
+tmp_dir = os.path.join(os.path.dirname(__file__), "tmp")
+
+
+def add_captions(dst, src, name):
+
+    ssl._create_default_https_context = ssl._create_unverified_context
+
+    model = whisper.load_model("base")
+
+    def extract_audio(vid, outfilename):
+        clip = VideoFileClip(vid)
+        resfile = os.path.join(tmp_dir, outfilename)
+        clip.audio.write_audiofile()
+        return resfile
+
+    def transcribe_audio(aud):
+        transcribe = model.transcribe(aud, task="translate")
+        segments = transcribe['segments']
+
+        for segment in segments:
+            startTime = str(0) + str(timedelta(seconds=int(segment['start']))) + ',000'
+            endTime = str(0) + str(timedelta(seconds=int(segment['end']))) + ',000'
+            text = segment['text']
+            segmentId = segment['id'] + 1
+            segment = f"{segmentId}\n{startTime} --> {endTime}\n{text[1:] if text[0] == ' ' else text}\n\n"
+
+            srtFilename = os.path.join(tmp_dir, f"{name}.srt")
+            with open(srtFilename, 'a', encoding='utf-8') as srtFile:
+                srtFile.write(segment)
+
+        return srtFilename
+
+    def combine_video_audio(vid, aud):
+        os.system("ffmpeg -i " + vid + " -i " + aud + " -c:v copy -c:a aac " + dst)
+
+    audio = extract_audio(src, f"{name}.mp3")
+
+    srtfilename = transcribe_audio(audio)
+
+    generator = lambda txt: TextClip(txt, font='Arial', fontsize=24, color='white')
+    subs = SubtitlesClip(srtfilename, generator)
+    subtitles = SubtitlesClip(subs, generator)
+
+    video = VideoFileClip(src)
+    audio = AudioFileClip(src)
+    result = CompositeVideoClip([video, subtitles.set_pos(('center', 'bottom'))])
+    result.audio = audio
+
+    result.write_videofile(dst, audio=True)
+
+    combine_video_audio(dst, f"{name}.mp3")
 
 
 def allowed_file(filename):
@@ -44,7 +100,10 @@ def upload_file():
 
         video = request.files["video"]
         video_name = str(uuid.uuid4())
-        video.save(os.path.join(app.config['UPLOAD_FOLDER'], f"{video_name}.png"))
+        # video.save(os.path.join(app.config['UPLOAD_FOLDER'], f"{video_name}.png"))
+        video_orig_loc = os.path.join(tmp_dir, f"{video_name}.png")
+        video.save(video_orig_loc)
+        add_captions(os.path.join(app.config['UPLOAD_FOLDER'], f"{video_name}.png"), video_orig_loc, video_name)
 
         c = Campaign()
         c.start = request.form["start_date"]
