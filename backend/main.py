@@ -101,7 +101,7 @@ def upload_file():
         video = request.files["video"]
         video_name = str(uuid.uuid4())
         # video.save(os.path.join(app.config['UPLOAD_FOLDER'], f"{video_name}.png"))
-        video_orig_loc = os.path.join(tmp_dir, f"{video_name}.png")
+        video_orig_loc = os.path.join(tmp_dir, f"{video_name}.mp4")
         video.save(video_orig_loc)
         add_captions(os.path.join(app.config['UPLOAD_FOLDER'], f"{video_name}.mp4"), video_orig_loc, video_name)
 
