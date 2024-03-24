@@ -1,7 +1,12 @@
 import React from "react";
 import './Network.css'
 
+import { useState } from "react";
+
 const Network = () =>{
+
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
 
 
     return(
@@ -13,7 +18,7 @@ const Network = () =>{
         <br></br>
         <h1>Join our network of hospitals</h1>
         <br></br>
-        <form action="http://localhost:5000" method="POST">
+        <form action="http://localhost:5000/upload_video" method="POST">
         <label for="name">Hospital Name:</label><br></br>
         <input type="text" id="hospital_name" name="name" required/><br></br>
         
@@ -31,13 +36,33 @@ const Network = () =>{
 
         <label for="message">Campaign Description:</label><br></br>
         <textarea id="description" name="message" rows="4" cols="50" required></textarea><br></br>
-        <label for="start">Start date:</label>
+        
 
-        <input type="date" id="start" name="trip-start" value="2024-01-01" min="2024-01-01" max="2200-12-31" /> 
-        <label for="start">End date:</label>
 
-        <input type="date" id="end" name="trip-start" value="2024-01-01" min="2024-01-01" max="2200-12-31" /><br></br>
+        <label>
+          Start Date:
+          <input
+            type="date"
+            id="start-date"
+            name="start-date"
+            value={startDate}
+            placeholder="DD/MM/YY"
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </label>
 
+        <label>
+          End Date:
+          <input
+            type="date"
+            id="end-date"
+            name="end-date"
+            value={endDate}
+            placeholder="DD/MM/YY"
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </label>
+     
         <label for="email">Email Contact:</label><br></br>
         <input type="email" id="contact_email" name="email" required/><br></br>
 
@@ -48,7 +73,7 @@ const Network = () =>{
         <input type="file" id="image-link" name="avatar" accept="image/png, image/jpeg" /><br></br>
 
         <label for="avatar">Upload a video presenting your mission:</label><br></br>
-        <input type="file" id="video-link" name="avatar" accept="image/png, image/jpeg" /><br></br><br></br>
+        <input type="file" id="video-link" name="avatar" accept="video/mp4" /><br></br><br></br>
         <input type="submit" value="Submit"/>
         </form>
         </div>
