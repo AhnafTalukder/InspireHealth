@@ -1,7 +1,7 @@
 import json
 import os
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from Objects.Campaign import Campaign
@@ -24,19 +24,19 @@ def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
-            return "no file"
+            return redirect("http://localhost:5173")
         file = request.files['file']
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
-            return "no file"
+            return redirect("http://localhost:5173")
 
         if not allowed_file(file.filename):
-            return "filetype not allowed"
+            return redirect("http://localhost:5173")
 
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return "success"
+        return redirect("http://localhost:5173")
 
 
 def write_campaign_json(campaigns):
@@ -87,4 +87,4 @@ if __name__ == '__main__':
     tc.id = "test_id"
     campaigns = [tc]
     write_campaign_json(campaigns)
-    app.run(debug=True)
+    app.run(debug=False)
