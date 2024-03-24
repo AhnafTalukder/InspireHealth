@@ -73,7 +73,8 @@ if __name__ == '__main__':
     tc.country = "Ukraine"
     tc.contact_email = "someone@gmail.com"
     tc.paypal = "@paypaluser"
-    tc.video_name = "test_video.mp4"
+    tc.image_link = "test_image.png"
+    tc.video_link = "test_video.mp4"
     campaigns = [tc]
     write_campaign_json(campaigns)
     app.run(debug=True)
