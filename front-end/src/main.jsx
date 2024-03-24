@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </Route>
         <Route path="/discover" element={<Layout />}>
           <Route index={true} element={<Discover />} />
-          <Route index={false} path="/campaignDetails/:hospital-name" element={<DetailView />} />
+        
 
         </Route>
         <Route path="/join-our-network" element={<Layout />}>

@@ -1,11 +1,19 @@
+import React from "react";
+import './Network.css'
+
 const Network = () =>{
 
 
     return(
         <>
-        <center>
+      
+   
+        <div className="network-form">
+       
+        <br></br>
         <h1>Join our network of hospitals</h1>
-        <form action="localhost:5000">
+        <br></br>
+        <form action="http://localhost:5000" method="POST">
         <label for="name">Hospital Name:</label><br></br>
         <input type="text" id="hospital_name" name="name" required/><br></br>
         
@@ -43,7 +51,9 @@ const Network = () =>{
         <input type="file" id="video-link" name="avatar" accept="image/png, image/jpeg" /><br></br><br></br>
         <input type="submit" value="Submit"/>
         </form>
-        </center>
+        </div>
+     
+    
         </>
     )
 
