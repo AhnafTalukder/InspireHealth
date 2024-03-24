@@ -24,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         
 
         </Route>
+        <Route index={false} path="/coinDetails/:id" element={<DetailView />} />
         <Route path="/join-our-network" element={<Layout />}>
           <Route index={true} element={<Network />} />
         </Route>
