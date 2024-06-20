@@ -5,7 +5,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="InspireHealth.jpg" alt="Logo">
+    <img src="InspireHealth.JPG" alt="Logo">
   
   <p align="center">
     InspireHealth provides a structured platform that promotes the needs of hospitals in developing nations and rural areas, with credibility and transparency as our guiding principles.
